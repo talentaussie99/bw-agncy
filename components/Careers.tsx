@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { ExternalLink, MapPin, Clock } from 'lucide-react';
-import { JOBS } from '../constants';
+import { JOBS } from '../constants.tsx';
 
 const Careers: React.FC = () => {
   return (
