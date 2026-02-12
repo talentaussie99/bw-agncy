@@ -28,7 +28,7 @@ const Navbar: React.FC = () => {
     const targetId = href.replace('#', '');
     const element = document.getElementById(targetId);
     if (element) {
-      const offset = 80; // height of the sticky navbar
+      const offset = 120; // Increased offset to account for banner height
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
 
@@ -40,7 +40,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-slate-900 shadow-xl py-3' : 'bg-slate-900/95 backdrop-blur-md py-4'}`}>
+    <nav className={`sticky top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-slate-900 shadow-xl py-3' : 'bg-slate-900/95 backdrop-blur-md py-4'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
