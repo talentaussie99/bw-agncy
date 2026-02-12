@@ -48,7 +48,7 @@ const About: React.FC = () => {
                   <Award className="w-6 h-6" />
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-slate-900">15+</div>
+                  <div className="text-2xl font-bold text-slate-900">90+</div>
                   <div className="text-xs text-slate-500 uppercase font-semibold">Years of Experience</div>
                 </div>
               </div>
