@@ -2,7 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  setView: (view: 'home' | 'privacy' | 'terms') => void;
+  currentView: string;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ setView, currentView }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -25,6 +30,19 @@ const Navbar: React.FC = () => {
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setIsOpen(false);
+    
+    if (currentView !== 'home') {
+      setView('home');
+      // Delay scrolling to ensure home view has rendered
+      setTimeout(() => {
+        scrollToElement(href);
+      }, 10);
+    } else {
+      scrollToElement(href);
+    }
+  };
+
+  const scrollToElement = (href: string) => {
     const targetId = href.replace('#', '');
     const element = document.getElementById(targetId);
     if (element) {
@@ -36,6 +54,8 @@ const Navbar: React.FC = () => {
         top: offsetPosition,
         behavior: 'smooth'
       });
+    } else if (href === '#home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -44,9 +64,8 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
-            <a 
-              href="#home" 
-              onClick={(e) => handleLinkClick(e, '#home')}
+            <button 
+              onClick={() => setView('home')}
               className="flex items-center transition-opacity hover:opacity-80"
             >
               <img 
@@ -59,7 +78,7 @@ const Navbar: React.FC = () => {
                   target.src = 'https://placehold.co/250x80?text=Brickworks+Agency'; 
                 }}
               />
-            </a>
+            </button>
           </div>
 
           {/* Desktop Links */}
