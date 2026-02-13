@@ -47,7 +47,7 @@ const Careers: React.FC = () => {
                   <div className="flex flex-wrap gap-6 text-sm text-slate-500">
                     <div className="flex items-center">
                       <MapPin className="w-4 h-4 mr-2" />
-                      Various Locations, Australia
+                      Sydney, NSW, Australia
                     </div>
                     <div className="flex items-center">
                       <Clock className="w-4 h-4 mr-2" />
