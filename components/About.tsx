@@ -41,18 +41,6 @@ const About: React.FC = () => {
             {/* Background decorative elements */}
             <div className="absolute -top-10 -left-10 w-40 h-40 bg-slate-100 rounded-full -z-0"></div>
             <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-[#d35400]/5 rounded-full -z-0"></div>
-            
-            <div className="absolute bottom-10 -left-6 bg-white p-6 rounded-xl shadow-xl z-20 border border-slate-100 hidden sm:block">
-              <div className="flex items-center space-x-4">
-                <div className="bg-[#d35400] p-3 rounded-lg text-white">
-                  <Award className="w-6 h-6" />
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-slate-900">15+</div>
-                  <div className="text-xs text-slate-500 uppercase font-semibold">Years of Experience</div>
-                </div>
-              </div>
-            </div>
           </div>
 
           <div>
