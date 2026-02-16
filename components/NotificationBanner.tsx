@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { Clock, AlertCircle } from 'lucide-react';
 
 const NotificationBanner: React.FC = () => {
+  const [shouldRender, setShouldRender] = useState(true);
+  const [isVisible, setIsVisible] = useState(true);
   const [timeLeft, setTimeLeft] = useState<{ days: number; hours: number; minutes: number; seconds: number }>({
     days: 30,
     hours: 0,
@@ -11,6 +13,16 @@ const NotificationBanner: React.FC = () => {
   });
 
   useEffect(() => {
+    // Start fading out after 5.5 seconds to complete by 6 seconds
+    const fadeTimer = setTimeout(() => {
+      setIsVisible(false);
+    }, 5500);
+
+    // Completely unmount after the animation finishes (6 seconds)
+    const unmountTimer = setTimeout(() => {
+      setShouldRender(false);
+    }, 6000);
+
     // Set target date to exactly 30 days from now for demonstration
     const targetDate = new Date();
     targetDate.setDate(targetDate.getDate() + 30);
@@ -32,11 +44,21 @@ const NotificationBanner: React.FC = () => {
       });
     }, 1000);
 
-    return () => clearInterval(timer);
+    return () => {
+      clearInterval(timer);
+      clearTimeout(fadeTimer);
+      clearTimeout(unmountTimer);
+    };
   }, []);
 
+  if (!shouldRender) return null;
+
   return (
-    <div className="bg-[#d35400] text-white py-2 px-4 relative z-[60] text-center shadow-lg">
+    <div 
+      className={`bg-[#d35400] text-white py-2 px-4 relative z-[60] text-center shadow-lg transition-all duration-500 ease-in-out transform ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'
+      }`}
+    >
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-2 md:gap-6 text-xs md:text-sm font-medium">
         <div className="flex items-center gap-2">
           <AlertCircle className="w-4 h-4 animate-pulse" />
