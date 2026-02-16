@@ -55,7 +55,8 @@ const Footer: React.FC<FooterProps> = ({ setView }) => {
                 <MapPin className="w-5 h-5 mr-3 text-[#d35400]" />
                 <div className="flex flex-col">
                   <span className="font-bold">Sydney Head Office</span>
-                  <span className="text-xs text-slate-500 uppercase tracking-wider">National Operations</span>
+                  <span className="text-sm text-slate-400">822 George St.</span>
+                  <span className="text-xs text-slate-500 uppercase tracking-wider mt-0.5">National Operations</span>
                 </div>
               </div>
               
