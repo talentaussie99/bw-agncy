@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Mail, MapPin } from 'lucide-react';
+import { Mail, MapPin, Clock } from 'lucide-react';
 
 interface FooterProps {
   setView: (view: 'home' | 'privacy' | 'terms') => void;
@@ -53,9 +53,26 @@ const Footer: React.FC<FooterProps> = ({ setView }) => {
             <div className="space-y-4">
               <div className="flex items-center text-slate-300">
                 <MapPin className="w-5 h-5 mr-3 text-[#d35400]" />
-                <span>Headquartered in Australia</span>
+                <div className="flex flex-col">
+                  <span className="font-bold">Sydney Head Office</span>
+                  <span className="text-xs text-slate-500 uppercase tracking-wider">National Operations</span>
+                </div>
               </div>
-              <div className="flex items-center text-slate-300">
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                <div className="flex items-center text-slate-400 text-sm">
+                  <MapPin className="w-4 h-4 mr-2 text-slate-600" />
+                  <span>Melbourne</span>
+                  <span className="ml-2 px-1.5 py-0.5 bg-slate-800 text-[10px] font-bold text-[#d35400] rounded border border-[#d35400]/20">SOON</span>
+                </div>
+                <div className="flex items-center text-slate-400 text-sm">
+                  <MapPin className="w-4 h-4 mr-2 text-slate-600" />
+                  <span>Adelaide</span>
+                  <span className="ml-2 px-1.5 py-0.5 bg-slate-800 text-[10px] font-bold text-[#d35400] rounded border border-[#d35400]/20">SOON</span>
+                </div>
+              </div>
+
+              <div className="flex items-center text-slate-300 pt-4">
                 <Mail className="w-5 h-5 mr-3 text-[#d35400]" />
                 <a href="mailto:brickworks.agency@outlook.com" className="hover:text-[#d35400] transition-colors">
                   brickworks.agency@outlook.com

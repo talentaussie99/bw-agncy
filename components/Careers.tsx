@@ -1,8 +1,11 @@
+
 import React from 'react';
-import { ExternalLink, MapPin, Clock } from 'lucide-react';
+import { ExternalLink, MapPin, Clock, Lock } from 'lucide-react';
 import { JOBS } from '../constants.tsx';
 
 const Careers: React.FC = () => {
+  const activeCount = JOBS.filter(j => j.status !== 'full').length;
+
   return (
     <section id="careers" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -16,59 +19,82 @@ const Careers: React.FC = () => {
             </p>
           </div>
           <div className="bg-slate-100 px-6 py-3 rounded-full text-sm font-semibold text-slate-600 whitespace-nowrap">
-            3 Active Openings
+            {activeCount} Active Openings
           </div>
         </div>
 
         <div className="space-y-6">
-          {JOBS.map((job, index) => (
-            <div 
-              key={index} 
-              className="group bg-white border border-slate-200 p-8 rounded-2xl hover:border-[#d35400] hover:shadow-xl hover:shadow-[#d35400]/5 transition-all"
-            >
-              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-                <div className="flex-1">
-                  <div className="flex flex-wrap items-center gap-3 mb-4">
-                    <h3 className="text-2xl font-bold text-slate-900 group-hover:text-[#d35400] transition-colors">
-                      {job.title}
-                    </h3>
-                    <div className="flex gap-2">
-                      <span className="bg-[#d35400]/10 text-[#d35400] px-3 py-1 rounded-full text-xs font-bold uppercase">
-                        Full-Time
-                      </span>
-                      <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold uppercase border border-slate-200">
-                        Part-Time
-                      </span>
+          {JOBS.map((job, index) => {
+            const isFull = job.status === 'full';
+            
+            return (
+              <div 
+                key={index} 
+                className={`group bg-white border ${isFull ? 'border-slate-100 bg-slate-50/50' : 'border-slate-200'} p-8 rounded-2xl ${!isFull ? 'hover:border-[#d35400] hover:shadow-xl hover:shadow-[#d35400]/5' : ''} transition-all`}
+              >
+                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+                  <div className={`flex-1 ${isFull ? 'opacity-60' : ''}`}>
+                    <div className="flex flex-wrap items-center gap-3 mb-4">
+                      <h3 className={`text-2xl font-bold text-slate-900 ${!isFull ? 'group-hover:text-[#d35400]' : ''} transition-colors`}>
+                        {job.title}
+                      </h3>
+                      <div className="flex gap-2">
+                        {isFull ? (
+                          <span className="bg-slate-200 text-slate-600 px-3 py-1 rounded-full text-xs font-bold uppercase flex items-center gap-1">
+                            <Lock className="w-3 h-3" /> Position Filled
+                          </span>
+                        ) : (
+                          <>
+                            <span className="bg-[#d35400]/10 text-[#d35400] px-3 py-1 rounded-full text-xs font-bold uppercase">
+                              Full-Time
+                            </span>
+                            <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold uppercase border border-slate-200">
+                              Part-Time
+                            </span>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                    <p className="text-slate-600 mb-6 leading-relaxed">
+                      {job.description}
+                    </p>
+                    <div className="flex flex-wrap gap-6 text-sm text-slate-500">
+                      <div className="flex items-center">
+                        <MapPin className="w-4 h-4 mr-2" />
+                        Sydney, NSW, Australia
+                      </div>
+                      {!isFull && (
+                        <div className="flex items-center">
+                          <Clock className="w-4 h-4 mr-2" />
+                          Immediate Start Available
+                        </div>
+                      )}
                     </div>
                   </div>
-                  <p className="text-slate-600 mb-6 leading-relaxed">
-                    {job.description}
-                  </p>
-                  <div className="flex flex-wrap gap-6 text-sm text-slate-500">
-                    <div className="flex items-center">
-                      <MapPin className="w-4 h-4 mr-2" />
-                      Sydney, NSW, Australia
-                    </div>
-                    <div className="flex items-center">
-                      <Clock className="w-4 h-4 mr-2" />
-                      Immediate Start Available
-                    </div>
+                  <div className="flex-shrink-0">
+                    {isFull ? (
+                      <button 
+                        disabled
+                        className="inline-flex items-center justify-center px-10 py-4 bg-slate-300 text-slate-500 font-bold rounded-xl cursor-not-allowed w-full lg:w-auto"
+                      >
+                        Applications Closed
+                      </button>
+                    ) : (
+                      <a 
+                        href={job.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center px-10 py-4 bg-[#d35400] text-white font-bold rounded-xl hover:bg-[#a04000] transition-all w-full lg:w-auto shadow-lg shadow-[#d35400]/10 group-hover:scale-[1.02]"
+                      >
+                        Apply Now
+                        <ExternalLink className="ml-2 w-4 h-4" />
+                      </a>
+                    )}
                   </div>
-                </div>
-                <div className="flex-shrink-0">
-                  <a 
-                    href={job.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center px-10 py-4 bg-[#d35400] text-white font-bold rounded-xl hover:bg-[#a04000] transition-all w-full lg:w-auto shadow-lg shadow-[#d35400]/10 group-hover:scale-[1.02]"
-                  >
-                    Apply Now
-                    <ExternalLink className="ml-2 w-4 h-4" />
-                  </a>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
         
         <div className="mt-16 p-10 bg-slate-900 rounded-3xl text-center text-white relative overflow-hidden">

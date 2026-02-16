@@ -22,4 +22,5 @@ export interface Job {
   title: string;
   description: string;
   link: string;
+  status?: 'active' | 'full';
 }

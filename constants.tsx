@@ -86,16 +86,25 @@ export const JOBS: Job[] = [
   {
     title: "Manpower Resource Consultant",
     description: "Manage end-to-end recruitment cycles for industrial and construction clients. Requires strong communication and networking skills within the Australian market.",
-    link: "https://form.jotform.com/brickworksagency/job-form-application-mrc"
+    link: "https://form.jotform.com/brickworksagency/job-form-application-mrc",
+    status: 'active'
   },
   {
     title: "Human Resource Operations Analyst",
     description: "Support our operational workforce with data-driven HR insights and administrative excellence. Ideal for detail-oriented professionals with a focus on compliance.",
-    link: "https://form.jotform.com/brickworksagency/job-form-application-hroa"
+    link: "https://form.jotform.com/brickworksagency/job-form-application-hroa",
+    status: 'active'
   },
   {
     title: "Talent Acquisition Partner",
     description: "Strategic role focusing on long-term talent pipelines for the building materials sector. Drive our employer branding and talent strategy forward.",
-    link: "https://form.jotform.com/brickworksagency/job-form-application-tap"
+    link: "https://form.jotform.com/brickworksagency/job-form-application-tap",
+    status: 'active'
+  },
+  {
+    title: "Production Machine Operator",
+    description: "Responsible for operating production machinery on the factory floor, such as brick/paver molding machines, mixers, rollers, and conveyors.",
+    link: "#",
+    status: 'full'
   }
 ];
